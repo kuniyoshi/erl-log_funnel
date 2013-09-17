@@ -1,0 +1,12 @@
+{application, disc_note,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { disc_note_app, []}},
+  {env, []}
+ ]}.
