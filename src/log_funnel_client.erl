@@ -1,6 +1,6 @@
--module(disc_note_client).
+-module(log_funnel_client).
 -export([open/1, reopen/0, append/1]).
--define(WORKER, disc_note_worker).
+-define(WORKER, log_funnel_worker).
 
 open(Filename) ->
     ok = gen_server:call(?WORKER, {open, Filename}).

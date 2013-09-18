@@ -1,4 +1,4 @@
--module(disc_note_worker).
+-module(log_funnel_worker).
 -behaviour(gen_server).
 -include_lib("eunit/include/eunit.hrl").
 -define(SERVER, ?MODULE).
@@ -40,8 +40,8 @@ start_link() ->
 %% ------------------------------------------------------------------
 
 init(Args) ->
-    {ok, IoDevice} = file:open(filename:join(code:priv_dir(disc_note), "error.log"),
-                              [append]),
+    {ok, IoDevice} = file:open(filename:join(code:priv_dir(log_funnel), "error.log"),
+                               [append]),
     {ok, [{error_device, IoDevice} | Args]}.
 
 handle_call({open, Filename}, _From, State) ->

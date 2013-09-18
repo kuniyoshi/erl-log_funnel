@@ -1,4 +1,4 @@
--module(disc_note_sup).
+-module(log_funnel_sup).
 -behaviour(supervisor).
 -export([start_link/0]).
 -export([init/1]).
@@ -8,5 +8,5 @@ start_link() ->
     supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 init([]) ->
-    Child = ?CHILD(disc_note_worker, worker),
+    Child = ?CHILD(log_funnel_worker, worker),
     {ok, {{one_for_one, 5, 10}, [Child]}}.

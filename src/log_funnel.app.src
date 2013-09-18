@@ -1,8 +1,8 @@
 {application,
-    disc_note,
+    log_funnel,
     [{description, ""},
      {vsn, "1"},
      {registered, []},
      {applications, [kernel, stdlib]},
-     {mod, {disc_note_app, []}},
+     {mod, {log_funnel_app, []}},
      {env, []}]}.
