@@ -88,7 +88,7 @@ handle_reopen(State) ->
     {io_device, IoDevice} = lists:keyfind(io_device, 1, State),
     {filename, Filename} = lists:keyfind(filename, 1, State),
     {ok, State2} = handle_open(Filename, State),
-    ok = file:close(IoDevice),
+    gen_server:cast(?SERVER, {close, IoDevice}),
     {ok, State2}.
 
 handle_append(Message, State) when is_binary(Message) ->
