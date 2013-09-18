@@ -1,5 +1,5 @@
 -module(log_funnel_client).
--export([open/1, reopen/0, append/1]).
+-export([open/1, reopen/0, append/1, queue_len/0]).
 -define(WORKER, log_funnel_worker).
 
 open(Filename) ->
@@ -10,3 +10,7 @@ reopen() ->
 
 append(Message) ->
     gen_server:cast(?WORKER, {append, Message}).
+
+queue_len() ->
+    {message_queue_len, Len} = erlang:process_info(whereis(?WORKER), message_queue_len),
+    Len.
