@@ -59,7 +59,6 @@ handle_cast({append, Message}, [{error_device, _IoDevice}] = State) ->
     handle_error(Message, State),
     {noreply, State};
 handle_cast({append, Message}, State) ->
-    io:format("append~n"),
     {ok, State2} = handle_append(Message, State),
     {noreply, State2}.
 
