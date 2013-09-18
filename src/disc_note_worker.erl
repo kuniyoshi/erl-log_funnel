@@ -41,7 +41,9 @@ start_link() ->
 
 init(Args) ->
     ?debugMsg("init"),
-    {ok, Args}.
+    {ok, IoDevice} = file:open(filename:join(code:priv_dir(disc_note), "error.log"),
+                              [append]),
+    {ok, [{error_device, IoDevice} | Args]}.
 
 handle_call({open, Filename}, _From, State) ->
     ?debugMsg("handle_call with filename"),
@@ -58,9 +60,12 @@ handle_cast({close, IoDevice}, State) ->
     timer:sleep(1000),  % wait other process which may be still writing.
     ok = file:close(IoDevice),
     {noreply, State};
-handle_cast({logging, Message}, State) ->
+handle_cast({append, Message}, [{error_device, _IoDevice}] = State) ->
+    handle_error(Message, State),
+    {noreply, State};
+handle_cast({append, Message}, State) ->
     ?debugMsg("handle_cast"),
-    io:format("logging~n"),
+    io:format("append~n"),
     {ok, State2} = handle_append(Message, State),
     {noreply, State2}.
 
@@ -100,6 +105,12 @@ handle_append(Message, State) ->
     ?debugVal(Message2),
     {io_device, IoDevice} = lists:keyfind(io_device, 1, State),
     ?debugVal(IoDevice),
+    ok = file:write(IoDevice, string:concat(Message2, "\n")),
+    {ok, State}.
+
+handle_error(Message, State) ->
+    {error_device, IoDevice} = lists:keyfind(error_device, 1, State),
+    Message2 = lib:nonl(Message),
     ok = file:write(IoDevice, string:concat(Message2, "\n")),
     {ok, State}.
 
