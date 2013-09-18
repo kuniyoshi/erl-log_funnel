@@ -6,11 +6,11 @@ log_funnel
 SYNOPSIS
 ========
 
-  > application:start(log_funnel).
-  > log_funnel_client:open("/var/log/log_funnel.log").
-  > log_funnel_client:append("blah blha blah").
-  > file:rename("/var/log/log_funnel.log", "/var/log/log_funnel.log.1").
-  > log_funnel_client:reopen().
+    > application:start(log_funnel).
+    > log_funnel_client:open("/var/log/log_funnel.log").
+    > log_funnel_client:append("blah blha blah").
+    > file:rename("/var/log/log_funnel.log", "/var/log/log_funnel.log.1").
+    > log_funnel_client:reopen().
 
 DESCRIPTION
 ===========
