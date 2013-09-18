@@ -40,7 +40,10 @@ start_link() ->
 %% ------------------------------------------------------------------
 
 init(Args) ->
-    {ok, IoDevice} = file:open(filename:join(code:priv_dir(log_funnel), "error.log"),
+    {ok, IoDevice} = file:open(filename:join(code:priv_dir(log_funnel),
+                                             string:join(["error",
+                                                          pid_to_list(self()),
+                                                          "log"], ".")),
                                [append]),
     {ok, [{error_device, IoDevice} | Args]}.
 
