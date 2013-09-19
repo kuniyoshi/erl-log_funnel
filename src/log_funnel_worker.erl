@@ -91,6 +91,8 @@ handle_reopen(State) ->
     gen_server:cast(?SERVER, {close, IoDevice}),
     {ok, State2}.
 
+%% trimming control characters may be useful.
+%% but not need my first version.
 handle_append(Message, State) when is_binary(Message) ->
     handle_append(binary_to_list(Message), State);
 handle_append(Message, State) ->
