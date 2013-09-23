@@ -33,3 +33,4 @@ TODO
 ====
 
 - trap error, and try reopen file
+- change behaviour to gen_event to control mail box
