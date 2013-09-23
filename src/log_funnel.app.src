@@ -2,6 +2,7 @@
     log_funnel,
     [{description, ""},
      {vsn, "1"},
+     {modules, []},
      {registered, []},
      {applications, [kernel, stdlib]},
      {mod, {log_funnel_app, []}},
